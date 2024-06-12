@@ -37,5 +37,9 @@ pnpm run tauri dev
 4. 运行结果如图
 ![待办事项番茄钟](./todo-pomoduro.png)
 
+## 项目博客地址
+
+[https://yuxuetr.com/blog/2024/06/12/todo-pomodoro-proj](https://yuxuetr.com/blog/2024/06/12/todo-pomodoro-proj)
+
 
 

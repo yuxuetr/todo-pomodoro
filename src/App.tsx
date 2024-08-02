@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { appWindow } from "@tauri-apps/api/window";
 import { PomodoroTimer, TodoList } from "./components";
-import { createTodoTable } from "./dbops";
+import { createTodoTable } from "./components/dbops";
 
 function App() {
   useEffect(() => {

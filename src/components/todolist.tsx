@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { queryAllTodos, insertTodo, completeTodo, uncompleteTodo, deleteTodo } from '../dbops';
+import { useEffect, useState } from 'react';
+import { queryAllTodos, insertTodo, completeTodo, uncompleteTodo, deleteTodo } from './dbops';
+import { Todo } from './types';
 
 export const TodoList = () => {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoText, setNewTodoText] = useState('');
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 

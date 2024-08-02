@@ -1,12 +1,9 @@
 import Database from 'tauri-plugin-sql-api';
+import { Todo } from './types';
 
 async function initDb() {
-  try {
-    const db = await Database.load("sqlite:../todos.db");
-    return db;
-  } catch (error) {
-    console.error("Failed to initialize database:", error);
-  }
+  const db = await Database.load("sqlite:todos.db");
+  return db;
 }
 
 export async function createTodoTable() {
@@ -73,23 +70,27 @@ export async function deleteTodo(id: number) {
   }
 }
 
-export async function queryTodosByTag(tag: string) {
+export async function queryTodosByTag(tag: string): Promise<Todo[]> {
   try {
     const db = await initDb();
-    return await db.select(`
+    const result = await db.select(`
       SELECT * FROM todo WHERE tags LIKE ?
     `, [`%${tag}%`]);
+    return result as Todo[];
   } catch (error) {
     console.error("Failed to query todos by tag:", error);
+    return []
   }
 }
 
-export async function queryAllTodos() {
+export async function queryAllTodos(): Promise<Todo[]> {
   try {
     const db = await initDb();
-    return await db.select("SELECT * FROM todo");
+    const result = await db.select("SELECT * FROM todo");
+    return result as Todo[];
   } catch (error) {
     console.error("Failed to query all todos:", error);
+    return [];
   }
 }
 

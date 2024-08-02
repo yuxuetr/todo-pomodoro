@@ -1,32 +1,36 @@
-// 示例 React 组件
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+
 
 export const PomodoroTimer = () => {
   const [time, setTime] = useState(25 * 60);
   const [isActive, setIsActive] = useState(false);
-  const [initialTime, setInitialTime] = useState(25 * 60);
 
   useEffect(() => {
-    let interval = null;
+    let interval: number | null = null;
     if (isActive && time > 0) {
-      interval = setInterval(() => {
+      interval = window.setInterval(() => {
         setTime(time => time - 1);
       }, 1000);
-    } else if (!isActive && time !== 0) {
-      clearInterval(interval);
+    } else if (interval) { //  <-  这里做了修改
+      window.clearInterval(interval);
     }
-    return () => clearInterval(interval);
+    return () => { 
+      if (interval) { //  <-  这里做了修改
+        window.clearInterval(interval); 
+      }
+    };
   }, [isActive, time]);
 
-  const formatTime = (time) => {
+  
+  const formatTime = (time: number) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
   };
 
-  const handleTimeChange = (event) => {
+  const handleTimeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newTime = parseInt(event.target.value) * 60;
-    setInitialTime(newTime);
+    // setInitialTime(newTime);
     setTime(newTime);
   };
 

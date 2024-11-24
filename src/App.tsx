@@ -5,17 +5,17 @@ import { createTodoTable } from "./components/dbops";
 
 function App() {
   useEffect(() => {
-    const hideWindowOnClose = async () => {
-      await appWindow.listen('tauri://close-requested', () => {
-        appWindow.hide();
-      });
-    };
+    // const hideWindowOnClose = async () => {
+    //   await appWindow.listen('tauri://close-requested', () => {
+    //     appWindow.hide();
+    //   });
+    // };
 
     async function setupDb() {
       await createTodoTable();
     }
 
-    hideWindowOnClose();
+    // hideWindowOnClose();
     setupDb();
   }, []);
 
